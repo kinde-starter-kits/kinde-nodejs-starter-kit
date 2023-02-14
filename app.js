@@ -3,6 +3,7 @@ const express = require('express');
 const session = require('express-session');
 const { GrantType, KindeClient } = require('@kinde-oss/kinde-nodejs-sdk');
 const { randomString } = require('./utils/randomString');
+const { isAuthenticated } = require('./middlewares/isAuthenticated');
 
 const app = express();
 const port = 3000;
@@ -58,15 +59,11 @@ app.get('/', (req, res) => {
     }
 });
 
-app.get('/admin', (req, res) => {
-  if (req.session && req.session.kindeAccessToken) {
-    res.render('admin', {
-      title: 'Admin',
-      user: client.getUserDetails(),
-    });
-  } else {
-    res.redirect('/');
-  }
+app.get('/admin', isAuthenticated(client), (req, res) => {
+  res.render('admin', {
+    title: 'Admin',
+    user: req.session.kindeUser,
+  });
 });
 
 app.listen(port, () => {
