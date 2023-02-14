@@ -1,0 +1,28 @@
+{
+  "name": "kinde-nodejs-starter-kit",
+  "version": "1.0.0",
+  "description": "Kinde NodeJS starter kit for regular ExpressJS apps",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./app.js"
+  },
+  "author": "engineering@kinde.com",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "express": "^4.18.0",
+    "express-session": "^1.17.3",
+    "nodemon": "^2.0.20",
+    "pug": "^3.0.2",
+    "@kinde-oss/kinde-nodejs-sdk": "git+https://nguyendevsts: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@github.com/kinde-oss/kinde-nodejs-sdk#8d8ea479b7331ecc8735f9f3cfa5d41a7c9014a4"
+  },
+  "devDependencies": {
+    "eslint": "^8.33.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.4"
+  }
+}
