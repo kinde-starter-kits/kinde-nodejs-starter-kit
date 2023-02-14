@@ -15,7 +15,7 @@
     "express-session": "^1.17.3",
     "nodemon": "^2.0.20",
     "pug": "^3.0.2",
-    "@kinde-oss/kinde-nodejs-sdk": "git+https://nguyendevsts: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@github.com/kinde-oss/kinde-nodejs-sdk#103b052468860852fe4d3abbb11adaae071e4b47"
+    "@kinde-oss/kinde-nodejs-sdk": "git+https://nguyendevsts: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@github.com/kinde-oss/kinde-nodejs-sdk#8d6cab49a8c4e262d0454bded75169ae036be304"
   },
   "devDependencies": {
     "eslint": "^8.33.0",

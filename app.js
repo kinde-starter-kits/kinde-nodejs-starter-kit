@@ -29,15 +29,21 @@ app.use(
 app.use(express.static('public'));
 app.set('view engine', 'pug');
 
-app.get('/login', client.login());
-
-app.get('/callback', client.callback(), (req, res) => {
-  return res.redirect('/admin')
+app.get('/login', client.login(), (req, res) => {
+  return res.redirect('/admin');
 });
 
-app.get('/register', client.register());
+app.get('/callback', client.callback(), (req, res) => {
+  return res.redirect('/admin');
+});
 
-app.get('/createOrg', client.createOrg());
+app.get('/register', client.register(), (req, res) => {
+  return res.redirect('/admin');
+});
+
+app.get('/createOrg', client.createOrg(), (req, res) => {
+  return res.redirect('/admin');
+});
 
 app.get('/logout', client.logout());
 
