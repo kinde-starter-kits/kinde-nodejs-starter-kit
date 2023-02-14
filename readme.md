@@ -22,8 +22,8 @@ Clone this repo and install dependencies with `npm i`
 Make a copy of `.env_sample` and name it simply `.env`. Set the following values from the Kinde `Settings -> Applications -> Backend app` page.
 
 -   `KINDE_DOMAIN` - your Kinde domain - e.g. `https://your_kinde_domain.kinde.com`
--   `KINDE_CLIENT_ID` - you can find this on the **App keys** page - e.g. `your_kinde_client_id`
--   `KINDE_CLIENT_SECRET` - you can find this on the **App keys** page - e.g. `your_kinde_client_secret`
+-   `KINDE_CLIENT_ID` - you can find this on the **Backend app** page - e.g. `your_kinde_client_id`
+-   `KINDE_CLIENT_SECRET` - you can find this on the **Backend app** page - e.g. `your_kinde_client_secret`
 -   `KINDE_REDIRECT_URI` - your callback url, make sure this URL is under your allowed callback redirect URLs. - e.g. `http://localhost:3000/callback`
 -   `KINDE_LOGOUT_REDIRECT_URI` - where you want users to be redirected to after logging out, make sure this URL is under your allowed logout redirect URLs. - e.g. `http://localhost:3000`
 
