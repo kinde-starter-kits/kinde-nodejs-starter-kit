@@ -1,4 +1,4 @@
-# Kinde Starter Kit - Express.JS
+# Kinde NodeJS Starter Kit - Express.JS
 
 ## Register an account on Kinde
 
