@@ -48,6 +48,17 @@ app.get('/createOrg', client.createOrg(), (req, res) => {
 
 app.get('/logout', client.logout());
 
+app.get('/test', isAuthenticated(client), (req, res) => {
+  return res.status(200).json({
+    isAuthenticated: client.isAuthenticated(req),
+    getUserDetails: client.getUserDetails(req),
+    getClaim: client.getClaim(req, 'given_name', 'id_token'),
+    getPermissions: client.getPermissions(req),
+    getOrganization: client.getOrganization(req),
+    getUserOrganizations: client.getUserOrganizations(req),
+  });
+});
+
 app.get('/', (req, res) => {
     if (req.session && req.session.kindeAccessToken) {
       res.redirect('/admin');

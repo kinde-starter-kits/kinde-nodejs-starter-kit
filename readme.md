@@ -41,5 +41,39 @@ KINDE_LOGOUT_REDIRECT_URI=http://localhost:3000/
 `npm start` and navigate to `http://localhost:3000`.
 
 Click on `Sign up` and register your first user for your business! 🚀
+* If you want to register with organization, navigate to `http://localhost:3000/createOrg?org_name=<org_name>`
 
-Click on `Sign in` and login with your user to the app.
+Click on `Sign in` to login with your user to the app.
+
+After login successfully, navigate to `http://localhost:3000/test` to test all helper function result (`isAuthenticated, getUserDetails, getClaim, getPermissions, getOrganization, getUserOrganizations`).
+
+Example result:
+```json
+{
+  "isAuthenticated": true,
+  "getUserDetails": {
+    "id": "kp:0094bbe7230c42f3be027b52e4e179a5",
+    "given_name": "Nguyen",
+    "family_name": "Test",
+    "email": "nlknguyen3108@gmail.com"
+  },
+  "getClaim": "Nguyen",
+  "getPermissions": {
+    "orgCode": "org_7052552de68",
+    "permissions": []
+  },
+  "getOrganization": {
+    "orgCode": "org_7052552de68"
+  },
+  "getUserOrganizations": {
+    "orgCodes": [
+        "org_7052552de68"
+    ]
+  }
+}
+```
+
+
+Click on `Sign out` to logout.
+
+
