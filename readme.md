@@ -45,19 +45,19 @@ Click on `Sign up` and register your first user for your business! 🚀
 
 Click on `Sign in` to login with your user to the app.
 
-After login successfully, navigate to `http://localhost:3000/test` to test all helper function result (`isAuthenticated, getUserDetails, getClaim, getPermissions, getOrganization, getUserOrganizations`).
+After login successfully, navigate to `http://localhost:3000/test` to test all helper function result ( `isAuthenticated, getUserDetails, getClaim, getPermissions, getOrganization, getUserOrganizations` ).
 
 Example result:
 ```json
 {
   "isAuthenticated": true,
   "getUserDetails": {
-    "id": "kp:0094bbe7230c42f3be027b52e4e179a5",
-    "given_name": "Nguyen",
-    "family_name": "Test",
-    "email": "nlknguyen3108@gmail.com"
+    "id": "kp:0094bbe7230c42f3be027b52e4e179a6",
+    "given_name": "Given",
+    "family_name": "Family",
+    "email": "example@gmail.com"
   },
-  "getClaim": "Nguyen",
+  "getClaim": "Given",
   "getPermissions": {
     "orgCode": "org_7052552de68",
     "permissions": []
