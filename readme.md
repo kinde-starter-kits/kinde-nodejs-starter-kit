@@ -45,7 +45,9 @@ Click on `Sign up` and register your first user for your business! 🚀
 
 Click on `Sign in` to login with your user to the app.
 
-After login successfully, navigate to `http://localhost:3000/test` to test all helper function result ( `isAuthenticated, getUserDetails, getClaim, getPermissions, getOrganization, getUserOrganizations` ).
+### `For GrantType.AUTHORIZATION_CODE or GrantType.PKCE`:
+
+After login successfully, navigate to `http://localhost:3000/test` to show all helper function result ( `isAuthenticated, getUserDetails, getClaim, getPermissions, getOrganization, getUserOrganizations` ).
 
 Example result:
 ```json
@@ -72,7 +74,6 @@ Example result:
   }
 }
 ```
-
 
 Click on `Sign out` to logout.
 
