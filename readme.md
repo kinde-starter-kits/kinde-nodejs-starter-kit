@@ -41,9 +41,10 @@ KINDE_LOGOUT_REDIRECT_URI=http://localhost:3000/
 `npm start` and navigate to `http://localhost:3000`.
 
 Click on `Sign up` and register your first user for your business! 🚀
-* If you want to register with organization, navigate to `http://localhost:3000/createOrg?org_name=<org_name>`
+* If you want to register with create an new organization, navigate to `http://localhost:3000/createOrg?org_name=<new_org_name>`
 
 Click on `Sign in` to login with your user to the app.
+* If you want to login with an exist organization, navigate to `http://localhost:3000/login?org_code=<org_code>`
 
 ### `For GrantType.AUTHORIZATION_CODE or GrantType.PKCE`:
 
