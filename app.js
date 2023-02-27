@@ -48,9 +48,28 @@ app.get('/createOrg', client.createOrg(), (req, res) => {
 
 app.get('/logout', client.logout());
 
+app.get('/test', isAuthenticated(client), (req, res) => {
+  if (client.grantType === GrantType.CLIENT_CREDENTIALS) {
+    return res.status(400).json("The helper function can't test with Client Credentials grant type. Please change to another grant type (PKCE or AUTHORIZATION_CODE) !!! ")
+  }
+  
+  return res.status(200).json({
+    isAuthenticated: client.isAuthenticated(req),
+    getUserDetails: client.getUserDetails(req),
+    getClaim: client.getClaim(req, 'given_name', 'id_token'),
+    getPermissions: client.getPermissions(req),
+    getOrganization: client.getOrganization(req),
+    getUserOrganizations: client.getUserOrganizations(req),
+  });
+});
+
 app.get('/', (req, res) => {
     if (req.session && req.session.kindeAccessToken) {
-      res.redirect('/admin');
+      if ( client.grantType === GrantType.CLIENT_CREDENTIALS ) {
+        return res.status(200).json({ kindeAccessToken: req.session.kindeAccessToken });
+      } else {
+        res.redirect('/admin');
+      }      
     } else {
       res.render('index', {
         title: 'Hey',
@@ -60,6 +79,10 @@ app.get('/', (req, res) => {
 });
 
 app.get('/admin', isAuthenticated(client), (req, res) => {
+  if (client.grantType === GrantType.CLIENT_CREDENTIALS) {
+    return res.redirect('/')
+  }
+
   res.render('admin', {
     title: 'Admin',
     user: req.session.kindeUser,
