@@ -1,5 +1,8 @@
 # Kinde NodeJS Starter Kit - Express.JS
 
+## Requirement
+ - `Node version 18.x.x or newer`
+
 ## Register an account on Kinde
 
 To get started set up an account on [Kinde](https://app.kinde.com/register).
@@ -9,9 +12,9 @@ To get started set up an account on [Kinde](https://app.kinde.com/register).
 1. In Kinde, go to **Settings** > **Applications** > **Backend app**.
 2. Add your callback URLs in the relevant fields. For example:
 
-    - Allowed callback URLs - for example, `https://localhost:3000/callback`
+    - Allowed callback URLs - for example, `http://localhost:3000/callback`
     > Important! This is required for your users to successfully log in to your app.
-    - Allowed logout redirect URLs - for example, `https://localhost:3000`
+    - Allowed logout redirect URLs - for example, `http://localhost:3000`
 
 3. Select **Save**.
 
