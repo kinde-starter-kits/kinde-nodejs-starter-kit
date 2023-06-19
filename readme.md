@@ -49,36 +49,17 @@ Click on `Sign up` and register your first user for your business! 🚀
 Click on `Sign in` to login with your user to the app.
 * If you want to login with an exist organization, navigate to `http://localhost:3000/login?org_code=<org_code>`
 
-### `For GrantType.AUTHORIZATION_CODE or GrantType.PKCE`:
+After login successfully, click `Test Helper Function` button to test all helper function 
+- `getFlag`
+- `getStringFlag`
+- `getBooleanFlag`
+- `getIntegerFlag`
+- `getClaim`
+- `getPermission`
+- `getPermissions`
+- `getOrganization`
+- `getUserOrganizations`
 
-After login successfully, navigate to `http://localhost:3000/test` to show all helper function result ( `isAuthenticated, getUserDetails, getClaim, getPermissions, getOrganization, getUserOrganizations` ).
+Click on `User details` button to show user details and access token
 
-Example result:
-```json
-{
-  "isAuthenticated": true,
-  "getUserDetails": {
-    "id": "kp:0094bbe7230c42f3be027b52e4e179a6",
-    "given_name": "Given",
-    "family_name": "Family",
-    "email": "example@gmail.com"
-  },
-  "getClaim": "Given",
-  "getPermissions": {
-    "orgCode": "org_7052552de68",
-    "permissions": []
-  },
-  "getOrganization": {
-    "orgCode": "org_7052552de68"
-  },
-  "getUserOrganizations": {
-    "orgCodes": [
-        "org_7052552de68"
-    ]
-  }
-}
-```
-
-Click on `Sign out` to logout.
-
-
+Click on `Sign out` button to logout.

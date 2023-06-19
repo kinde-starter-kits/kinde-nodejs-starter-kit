@@ -4,7 +4,7 @@ block content
 
     header
         nav.nav.container
-            h1.text-display-3 KindeAuth
+            a.btn.btn-light(href='/helper-functions') Back
             .profile-blob
                 if !!user.picture
                     .avatar #{user.picture}
@@ -15,11 +15,12 @@ block content
                     a.text-subtle(href='/logout') Sign out
     main
         .container
-            .card.start-hero
-                p.text-body-2.start-hero-intro Woohoo!
-                p.text-display-2 Your authentication is all sorted.
-                a.btn.btn-light(href='/helper-functions') Test Helper Function
-                a.btn.btn-light.m-1(href='/user-detail') User details
-                        
-            section.next-steps-section
-                h2.text-heading-1 Next steps for you
+            .card.start-hero-small
+                p.text-body-2
+                | Get Boolean Flag
+            br
+            h4 Code:
+            input.code.text-body-3(size='70', value='is_dark_mode', disabled='')
+            h4 Result:
+            input.code.text-body-3(size='70', value=resultGetBooleanFlag, disabled='')
+            br

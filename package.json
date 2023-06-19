@@ -10,12 +10,13 @@
   "author": "engineering@kinde.com",
   "license": "ISC",
   "dependencies": {
+    "@kinde-oss/kinde-nodejs-sdk": "^1.2.0",
+    "body-parser": "^1.20.2",
     "dotenv": "^16.0.1",
     "express": "^4.18.0",
     "express-session": "^1.17.3",
     "nodemon": "^2.0.20",
-    "pug": "^3.0.2",
-    "@kinde-oss/kinde-nodejs-sdk": "git+https://nguyendevsts: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@github.com/kinde-oss/kinde-nodejs-sdk#v1.0.0"
+    "pug": "^3.0.2"
   },
   "devDependencies": {
     "eslint": "^8.33.0",
