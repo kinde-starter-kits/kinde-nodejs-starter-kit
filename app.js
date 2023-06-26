@@ -71,29 +71,6 @@ app.get('/get-flag-view',isAuthenticated(kindeClient), (req, res) => {
   })
 });
 
-app.get('/get-string-flag-view',isAuthenticated(kindeClient), (req, res) => {
-  res.render('get_string_flag',{
-    user: kindeClient.getUserDetails(req),
-    resultGetStringFlag: kindeClient.getStringFlag(req, 'theme'),
-  })
-});
-
-app.get('/get-integer-flag-view',isAuthenticated(kindeClient), (req, res) => {
-  res.render('get_integer_flag',{
-    user: kindeClient.getUserDetails(req),
-    resultGetIntegerFlag: kindeClient.getIntegerFlag(req, 'competitions_limit'),
-  })
-});
-
-app.get('/get-boolean-flag-view',isAuthenticated(kindeClient), (req, res) => {
-  const result = kindeClient.getBooleanFlag(req, 'is_dark_mode');
-
-  res.render('get_boolean_flag',{
-    user: kindeClient.getUserDetails(req),
-    resultGetBooleanFlag: result.toString(),
-  })
-});
-
 app.get('/get-permissions-view',isAuthenticated(kindeClient), (req, res) => {
   res.render('get_permissions',{
     user: kindeClient.getUserDetails(req),
