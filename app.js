@@ -110,6 +110,14 @@ app.get('/get-user-organization-view',isAuthenticated(kindeClient), (req, res) =
   })
 });
 
+app.get('/get-token-view',isAuthenticated(kindeClient), async (req, res) => {
+  const token = await kindeClient.getToken(req);
+  res.render('get_token',{
+    user: kindeClient.getUserDetails(req),
+    resultGetToken: token
+  })
+});
+
 app.get('/', async (req, res) => {
   const isAuthenticated = await kindeClient.isAuthenticated(req);
   if (isAuthenticated) {
