@@ -1,8 +1,7 @@
 require('dotenv').config();
 const express = require('express');
-const session = require('express-session');
+const bodyParser = require('body-parser');
 const { GrantType, KindeClient } = require('@kinde-oss/kinde-nodejs-sdk');
-const { randomString } = require('./utils/randomString');
 const { isAuthenticated } = require('./middlewares/isAuthenticated');
 
 const app = express();
@@ -17,75 +16,124 @@ const options = {
   // scope: 'openid offline profile email'
   // audience: 'https://example.com/api'
 };
-const client = new KindeClient(options);
+const kindeClient = new KindeClient(options);
 
-app.use(
-  session({
-    secret: randomString(),
-    saveUninitialized: true,
-    cookie: { maxAge: 1000 * 60 * 60 * 24 },
-    resave: false,
-  }),
-);
 app.use(express.static('public'));
 app.set('view engine', 'pug');
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-app.get('/login', client.login(), (req, res) => {
+app.get('/login', kindeClient.login(), (req, res) => {
   return res.redirect('/admin');
 });
 
-app.get('/callback', client.callback(), (req, res) => {
+app.get('/callback', kindeClient.callback(), async (req, res) => {
   return res.redirect('/admin');
 });
 
-app.get('/register', client.register(), (req, res) => {
+app.get('/register', kindeClient.register(), (req, res) => {
   return res.redirect('/admin');
 });
 
-app.get('/createOrg', client.createOrg(), (req, res) => {
+app.get('/createOrg', kindeClient.createOrg(), (req, res) => {
   return res.redirect('/admin');
 });
 
-app.get('/logout', client.logout());
+app.get('/logout', kindeClient.logout());
 
-app.get('/test', isAuthenticated(client), (req, res) => {
-  if (client.grantType === GrantType.CLIENT_CREDENTIALS) {
-    return res.status(400).json("The helper function can't test with Client Credentials grant type. Please change to another grant type (PKCE or AUTHORIZATION_CODE) !!! ")
-  }
-  
-  return res.status(200).json({
-    isAuthenticated: client.isAuthenticated(req),
-    getUserDetails: client.getUserDetails(req),
-    getClaim: client.getClaim(req, 'given_name', 'id_token'),
-    getPermissions: client.getPermissions(req),
-    getOrganization: client.getOrganization(req),
-    getUserOrganizations: client.getUserOrganizations(req),
+app.get('/helper-functions', isAuthenticated(kindeClient), (req, res) => {
+  res.render('helper_functions',{
+    user: kindeClient.getUserDetails(req)
   });
 });
 
-app.get('/', (req, res) => {
-    if (req.session && req.session.kindeAccessToken) {
-      if ( client.grantType === GrantType.CLIENT_CREDENTIALS ) {
-        return res.status(200).json({ kindeAccessToken: req.session.kindeAccessToken });
-      } else {
-        res.redirect('/admin');
-      }      
-    } else {
-      res.render('index', {
-        title: 'Hey',
-        message: 'Hello there! what would you like to do?',
-      });
-    }
+app.get('/user-detail', isAuthenticated(kindeClient), async (req, res) => {
+  const accessToken = await kindeClient.getToken(req);
+  res.render('details',{
+    user: kindeClient.getUserDetails(req),
+    accessToken: accessToken
+  });
 });
 
-app.get('/admin', isAuthenticated(client), (req, res) => {
-  if (client.grantType === GrantType.CLIENT_CREDENTIALS) {
-    return res.redirect('/')
-  }
+app.get('/get-claim-view',isAuthenticated(kindeClient), (req, res) => {
+  const result = kindeClient.getClaim(req, 'given_name', 'id_token');
+  res.render('get_claim',{
+    user: kindeClient.getUserDetails(req),
+    resultGetClaim: JSON.stringify(result)
+  })
+});
 
+app.get('/get-flag-view',isAuthenticated(kindeClient), (req, res) => {
+  const result = kindeClient.getFlag(req, 'theme', {defaultValue: false}, 's');
+  res.render('get_flag',{
+    user: kindeClient.getUserDetails(req),
+    resultGetFlag: JSON.stringify(result),
+  })
+});
+
+app.get('/get-permissions-view',isAuthenticated(kindeClient), (req, res) => {
+  res.render('get_permissions',{
+    user: kindeClient.getUserDetails(req),
+    resultGetPermissions: JSON.stringify(kindeClient.getPermissions(req))
+  })
+});
+
+app.get('/get-permission-view',isAuthenticated(kindeClient), (req, res) => {
+  res.render('get_permission',{
+    user: kindeClient.getUserDetails(req),
+  })
+});
+
+app.post('/get-permission', isAuthenticated(kindeClient), (req, res) => {
+  try {
+    const { permission } = req.body;
+    const result = kindeClient.getPermission(req, permission);
+    if (result) {
+      res.render('get_permission',{ user: kindeClient.getUserDetails(req), resultGetPermission: JSON.stringify(result)});
+    } 
+  } catch(e) {
+    res.render('get_permission', { user: kindeClient.getUserDetails(req), errorGetPermission: e.message});
+  }  
+});
+
+app.get('/get-organization-view',isAuthenticated(kindeClient), (req, res) => {
+  res.render('get_organization',{
+    user: kindeClient.getUserDetails(req),
+    resultGetOrganization: JSON.stringify(kindeClient.getOrganization(req))
+  })
+});
+
+app.get('/get-user-organization-view',isAuthenticated(kindeClient), (req, res) => {
+  res.render('get_user_organizations',{
+    user: kindeClient.getUserDetails(req),
+    resultGetUserOrganizations: JSON.stringify(kindeClient.getUserOrganizations(req))
+  })
+});
+
+app.get('/get-token-view',isAuthenticated(kindeClient), async (req, res) => {
+  const token = await kindeClient.getToken(req);
+  res.render('get_token',{
+    user: kindeClient.getUserDetails(req),
+    resultGetToken: token
+  })
+});
+
+app.get('/', async (req, res) => {
+  const isAuthenticated = await kindeClient.isAuthenticated(req);
+  if (isAuthenticated) {
+      res.redirect('/admin');
+  } else {
+    res.render('index', {
+      title: 'Hey',
+      message: 'Hello there! what would you like to do?',
+    });
+  }
+});
+
+app.get('/admin', isAuthenticated(kindeClient), (req, res) => {
   res.render('admin', {
     title: 'Admin',
-    user: req.session.kindeUser,
+    user: kindeClient.getUserDetails(req),
   });
 });
 

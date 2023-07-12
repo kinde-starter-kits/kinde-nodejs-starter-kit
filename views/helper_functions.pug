@@ -4,7 +4,7 @@ block content
 
     header
         nav.nav.container
-            h1.text-display-3 KindeAuth
+            a.btn.btn-light(href='/admin') Back
             .profile-blob
                 if !!user.picture
                     .avatar #{user.picture}
@@ -17,9 +17,14 @@ block content
         .container
             .card.start-hero
                 p.text-body-2.start-hero-intro Woohoo!
-                p.text-display-2 Your authentication is all sorted.
-                a.btn.btn-light(href='/helper-functions') Test Helper Function
-                a.btn.btn-light.m-1(href='/user-detail') User details
+                p.text-display-2 Choose helper function to test
+                a.btn.btn-light.m-1(href='/get-claim-view') Get claim
+                a.btn.btn-light.m-1(href='/get-flag-view') Get flag
+                a.btn.btn-light.m-1(href='/get-permission-view') Get permission
+                a.btn.btn-light.m-1(href='/get-permissions-view') Get permissions
+                a.btn.btn-light.m-1(href='/get-user-organization-view') Get user organization
+                a.btn.btn-light.m-1(href='/get-organization-view') Get organizations
+                a.btn.btn-light.m-1(href='/get-token-view') Get token
                         
             section.next-steps-section
                 h2.text-heading-1 Next steps for you

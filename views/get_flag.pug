@@ -1,0 +1,34 @@
+extends layouts/main-layout.pug
+
+block content
+
+    header
+        nav.nav.container
+            a.btn.btn-light(href='/helper-functions') Back
+            .profile-blob
+                if !!user.picture
+                    .avatar #{user.picture}
+                else
+                    .avatar #{user.given_name[0]}#{user.given_name[1]}
+                div
+                    p.text-heading-2 #{user.given_name} #{user.family_name}
+                    a.text-subtle(href='/logout') Sign out
+    main
+      .container
+            .card.start-hero-small
+                p.text-body-2
+                | Get Flag
+            br
+            h4 Code:
+            input.code.text-body-3(size='70', value='theme', disabled='')
+            h4 Default Value:
+            input.code.text-body-3(size='70', value='pink', disabled='')
+            h4 Flag Type:
+            input.code.text-body-3(size='70', value='s', disabled='')
+            h4 Result:
+            input.code.text-body-3(size='70', value=resultGetFlag, disabled='')
+            br
+                   
+
+
+

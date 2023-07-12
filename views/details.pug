@@ -1,0 +1,38 @@
+extends layouts/main-layout.pug
+
+block content
+    header
+        nav.nav.container
+            a.btn.btn-light(href='/admin') Back
+            .profile-blob
+                if !!user.picture
+                    .avatar #{user.picture}
+                else
+                    .avatar #{user.given_name[0]}#{user.given_name[1]}
+                div
+                    p.text-heading-2 #{user.given_name} #{user.family_name}
+                    a.text-subtle(href='/logout') Sign out
+    main
+      .container
+        .card.start-hero-small
+          p.text-body-2
+            | User details
+        p.text-body-2.next-steps-section
+        h4 Avatar:
+        if user.picture
+            img(src=user.picture)
+        else 
+            input.code.text-body-3(size='70', value='No avatar', disabled='')
+
+
+        h4 Id:
+        input.code.text-body-3(size='70', value=user.id, disabled='')
+        h4 Given name:
+        input.code.text-body-3(size='70', value=user.given_name, disabled='')
+        h4 Family name:
+        input.code.text-body-3(size='70', value=user.family_name, disabled='')
+        h4 Email:
+        input.code.text-body-3(size='70', value=user.email, disabled='')
+        h4 Access token:
+        pre.code.text-body-3
+            p #{accessToken}

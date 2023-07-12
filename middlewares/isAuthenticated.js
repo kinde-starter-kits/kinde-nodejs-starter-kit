@@ -1,8 +1,13 @@
-const isAuthenticated = (client) => async (req, res, next) => {
-  if(!client.isAuthenticated(req)){
-    return res.redirect('/login');
-  };
-  return next();
+const isAuthenticated = (kindeClient) => async (req, res, next) => {
+  try {
+    const isAuthenticated = await kindeClient.isAuthenticated(req);
+    if (!isAuthenticated) {
+      return res.redirect('/');
+    }
+    next();
+  } catch (e) {
+    return res.redirect('/');
+  }
 };
 
 module.exports = { isAuthenticated };
