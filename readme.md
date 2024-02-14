@@ -29,6 +29,7 @@ Make a copy of `.env_sample` and name it simply `.env`. Set the following values
 -   `KINDE_CLIENT_SECRET` - you can find this on the **Backend app** page - e.g. `<your_kinde_client_secret>`
 -   `KINDE_REDIRECT_URI` - your callback url, make sure this URL is under your allowed callback redirect URLs. - e.g. `http://localhost:3000/callback`
 -   `KINDE_LOGOUT_REDIRECT_URI` - where you want users to be redirected to after logging out, make sure this URL is under your allowed logout redirect URLs. - e.g. `http://localhost:3000`
+-   `KINDE_POST_LOGIN_REDIRECT_URI` - where you want users to be redirected to after logging in
 
 ### Example
 
@@ -38,6 +39,7 @@ KINDE_CLIENT_ID=<your_kinde_client_id>
 KINDE_CLIENT_SECRET=<your_kinde_client_secret>
 KINDE_REDIRECT_URI=http://localhost:3000/callback
 KINDE_LOGOUT_REDIRECT_URI=http://localhost:3000/
+KINDE_POST_LOGIN_REDIRECT_URI=http://localhost:3000/post-login-uri
 ```
 ## Start the app
 
